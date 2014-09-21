@@ -27,7 +27,7 @@ QUADRANT.__index = QUADRANT
 local QUADRANT_DATA = {}
 
 --[[
-	Registering Quadrant metatable.
+    Registering Quadrant metatable.
 ]]--
 
 debug.getregistry().Quadrant = QUADRANT
@@ -39,17 +39,17 @@ debug.getregistry().Quadrant = QUADRANT
 ]]--
 
 function Quadrant(x, y, z)
-	x, y, z = math.floor(x), math.floor(y), math.floor(z)
-	local id = string.format("%d, %d, %d", x, y, z)
-	if not QUADRANT_DATA[id] then
-		QUADRANT_DATA[id] = setmetatable({
-			x = x,
-			y = y,
-			z = z
-		}, QUADRANT)
-	end
+    x, y, z = math.floor(x), math.floor(y), math.floor(z)
+    local id = string.format("%d, %d, %d", x, y, z)
+    if not QUADRANT_DATA[id] then
+        QUADRANT_DATA[id] = setmetatable({
+            x = x,
+            y = y,
+            z = z
+        }, QUADRANT)
+    end
 
-	return QUADRANT_DATA[id]
+    return QUADRANT_DATA[id]
 end
 
 --[[
@@ -59,12 +59,12 @@ end
 ]]--
 
 function QuadrantPosition(position)
-	local coordinates = position / QUADRANT_DIAMETER	
-	return Quadrant(
-		coordinates.x,
-		coordinates.y,
-		coordinates.z
-	)
+    local coordinates = position / QUADRANT_DIAMETER    
+    return Quadrant(
+        coordinates.x,
+        coordinates.y,
+        coordinates.z
+    )
 end
 
 --[[
@@ -74,8 +74,8 @@ end
 ]]--
 
 function QuadrantString(str)
-	local parts = string.Explode(", ", str)
-	return Quadrant(tonumber(parts[1]), tonumber(parts[2]), tonumber(parts[3]))
+    local parts = string.Explode(", ", str)
+    return Quadrant(tonumber(parts[1]), tonumber(parts[2]), tonumber(parts[3]))
 end
 
 --[[
@@ -85,7 +85,7 @@ end
 ]]--
 
 function IsQuadrant(obj)
-	return getmetatable(obj) == QUADRANT
+    return getmetatable(obj) == QUADRANT
 end
 
 --[[
@@ -95,7 +95,7 @@ end
 ]]--
 
 function GetQuadrantRadius()
-	return QUADRANT_RADIUS
+    return QUADRANT_RADIUS
 end
 
 --[[
@@ -105,7 +105,7 @@ end
 ]]--
 
 function GetQuadrantDiameter()
-	return QUADRANT_DIAMETER
+    return QUADRANT_DIAMETER
 end
 
 --[[
@@ -115,7 +115,7 @@ end
 ]]--
 
 function QUADRANT:__tostring()
-	return string.format("%d, %d, %d", self.x, self.y, self.z)
+    return string.format("%d, %d, %d", self.x, self.y, self.z)
 end
 
 --[[
@@ -125,7 +125,7 @@ end
 ]]--
 
 function QUADRANT:__eq(quadrant)
-	return self.x == quadrant.x and self.y == quadrant.y and self.z == quadrant.z
+    return self.x == quadrant.x and self.y == quadrant.y and self.z == quadrant.z
 end
 
 --[[
@@ -135,7 +135,7 @@ end
 ]]--
 
 function QUADRANT:GetMins()
-	return -Vector(QUADRANT_RADIUS, QUADRANT_RADIUS, QUADRANT_RADIUS)
+    return -Vector(QUADRANT_RADIUS, QUADRANT_RADIUS, QUADRANT_RADIUS)
 end
 
 --[[
@@ -145,7 +145,7 @@ end
 ]]--
 
 function QUADRANT:GetMaxs()
-	return Vector(QUADRANT_RADIUS, QUADRANT_RADIUS, QUADRANT_RADIUS)
+    return Vector(QUADRANT_RADIUS, QUADRANT_RADIUS, QUADRANT_RADIUS)
 end
 
 --[[
@@ -155,7 +155,7 @@ end
 ]]--
 
 function QUADRANT:GetPos()
-	return Vector((self.x * QUADRANT_DIAMETER) + QUADRANT_RADIUS, (self.y * QUADRANT_DIAMETER) + QUADRANT_RADIUS, (self.z * QUADRANT_DIAMETER) + QUADRANT_RADIUS)
+    return Vector((self.x * QUADRANT_DIAMETER) + QUADRANT_RADIUS, (self.y * QUADRANT_DIAMETER) + QUADRANT_RADIUS, (self.z * QUADRANT_DIAMETER) + QUADRANT_RADIUS)
 end
 
 --[[
@@ -165,8 +165,8 @@ end
 ]]--
 
 function QUADRANT:WorldToLocal(position)
-	local vector = WorldToLocal(position, Angle(), self:GetPos(), Angle())
-	return vector
+    local vector = WorldToLocal(position, Angle(), self:GetPos(), Angle())
+    return vector
 end
 
 --[[
@@ -176,8 +176,8 @@ end
 ]]--
 
 function QUADRANT:LocalToWorld(position)
-	local vector, _ = LocalToWorld(position, Angle(), self:GetPos(), Angle())
-	return vector
+    local vector, _ = LocalToWorld(position, Angle(), self:GetPos(), Angle())
+    return vector
 end
 
 --[[
@@ -187,21 +187,21 @@ end
 ]]--
 
 function QUADRANT:IsAirborne()
-	local time = CurTime()
-	if self.LastAirTrace ~= time then
-		local position = self:LocalToWorld(Vector(0, 0, -QUADRANT_RADIUS))
-		self.AirTrace = util.TraceHull{
-			start = position,
-			endpos = position,
-			mins = -Vector(QUADRANT_RADIUS, QUADRANT_RADIUS, 2.5),
-			maxs = Vector(QUADRANT_RADIUS, QUADRANT_RADIUS, 2.5),
-			mask = MASK_SOLID_BRUSHONLY
-		}
+    local time = CurTime()
+    if self.LastAirTrace ~= time then
+        local position = self:LocalToWorld(Vector(0, 0, -QUADRANT_RADIUS))
+        self.AirTrace = util.TraceHull{
+            start = position,
+            endpos = position,
+            mins = -Vector(QUADRANT_RADIUS, QUADRANT_RADIUS, 2.5),
+            maxs = Vector(QUADRANT_RADIUS, QUADRANT_RADIUS, 2.5),
+            mask = MASK_SOLID_BRUSHONLY
+        }
 
-		self.LastAirTrace = time
-	end
+        self.LastAirTrace = time
+    end
 
-	return not self.AirTrace.Hit
+    return not self.AirTrace.Hit
 end
 
 --[[

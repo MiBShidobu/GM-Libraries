@@ -7,7 +7,7 @@
     Name: ents.CreateFromDuped(table Table)
     Desc: Helper function to create, spawn, and activate entities from dupe structure.
 
-	See duplicator.CopyEntTable( http://wiki.garrysmod.com/page/duplicator/CopyEntTable ) to create dupe structure.
+    See duplicator.CopyEntTable( http://wiki.garrysmod.com/page/duplicator/CopyEntTable ) to create dupe structure.
 
     State: SERVER
 ]]--
