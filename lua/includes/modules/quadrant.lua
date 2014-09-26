@@ -1,21 +1,6 @@
 --[[
-    Quadrant Object Library By MiBShidobu
-
-    Description:
-        This addon provides a new Quadrant object functionality for other addons to use. To get help using it, check out
-        the wiki.
-
-    Developing For:
-        To expand upon the Quadrant object, use FindMetaTable with the parameter "Quadrant" and extend it would like any
-        other metatable. Quadrant objects also retain indexed metadata like entities for all runtime. e.g.
-
-            local quadrant = Quadrant(2, 5, 0)
-            quadrant.mymetadata = "Ello!"
-
-            print(quadrant.mymetadata) -- prints, Ello!
-
-    Credits:
-        MiBShidobu - Main Developer
+    GM-Libraries :: Quadrant Library Script
+        by MiBShidobu
 ]]--
 
 local QUADRANT_RADIUS = 600
