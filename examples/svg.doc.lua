@@ -3,7 +3,7 @@
     process behind rendering, check lua/includes/modules/svg.lua. This is just explaining how to use the functions.
 ]]--
 
--- SVG renders act like any other IMaterial maded via Material.
+-- SVG renders act like any other IMaterial made via Material.
 local mymaterial = SVG("materials/mysvg.svg", 512, 512)
 
 --[[
