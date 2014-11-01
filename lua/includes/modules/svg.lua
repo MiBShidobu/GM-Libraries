@@ -13,7 +13,7 @@
         each SVG. So take that how you will though.
 ]]--
 
-if SVG and SVGRaw then
+if SVG and SVGRaw and IsSVGReady then
     return -- We only need to load once, if we load again might leave behind stray Awesomium processes.
 end
 
